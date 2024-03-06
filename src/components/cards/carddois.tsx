@@ -59,7 +59,7 @@ export default function CardDois() {
         </Accordion>
       </Box>
       <Divider />
-      <Box sx={{ p: 2 }} className="flex items-center justify-between">
+      <Box sx={{ p: 1 }} className="flex items-center justify-between">
         <Typography variant="body2">
           <Link
             href="https://wa.me/+558599185575?text=Olá, Amanda gostaria de agendar massagem relaxante!"

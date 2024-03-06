@@ -67,7 +67,7 @@ export default function CardPromo() {
             saúde e a aparência da pele, deixando-a mais limpa, suave e
             radiante.
           </Typography>
-          <Box sx={{ p: 2 }} className="flex justify-between items-center">
+          <Box sx={{ p: 1 }} className="flex justify-between items-center">
             <Typography variant="body2">
               <Typography variant="body2">
                 <Link
@@ -81,7 +81,7 @@ export default function CardPromo() {
             <Stack
               direction="row"
               spacing={1}
-              className="text-lg font-semibold"
+              className="sm:text-lg font-semibold text-sm"
             >
               R$: 100,00
             </Stack>
