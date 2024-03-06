@@ -8,7 +8,7 @@ import TemporaryDrawer from "./drawer";
 
 export default function Header() {
   return (
-    <section className="w-full py-2 md:py-5 px-3">
+    <section className="w-full py-2 ">
       <div className="flex justify-between items-center ">
         <div className="">
           <Image src={Logo} alt="logo" width={80} />
