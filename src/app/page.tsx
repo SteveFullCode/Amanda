@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <main className="mx-auto w-full h-full container">
       <div className="flex flex-col items-center">
-        <h1 className="font-semibold text-3xl md:text-5xl text-fuchsia-900">
+        <h1 className="font-semibold text-2xl md:text-5xl text-fuchsia-900">
           Amanda fernandes
         </h1>
         <p className="text-sm md:text-xl text-zinc-600">

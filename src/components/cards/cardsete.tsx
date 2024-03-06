@@ -64,7 +64,7 @@ export default function CardSete() {
             href="https://wa.me/+558599185575?text=Olá, Amanda gostaria de agendar hidratação facial!"
             target="_blank"
           >
-            <Button className=" bg-fuchsia-900 w-full">Contate-me</Button>
+            <Button className=" bg-fuchsia-900 p-2">Contate-me</Button>
           </Link>
         </Typography>
         <Stack direction="row" spacing={1}>

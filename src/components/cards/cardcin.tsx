@@ -63,7 +63,7 @@ export default function CardCinco() {
             href="https://wa.me/+558599185575?text=Olá, Amanda gostaria de agendar Limpeza de pele!"
             target="_blank"
           >
-            <Button className=" bg-fuchsia-900 w-full">Contate-me</Button>
+            <Button className=" bg-fuchsia-900 p-2">Contate-me</Button>
           </Link>
         </Typography>
         <Stack direction="row" spacing={1}>

@@ -67,22 +67,18 @@ export default function CardPromo() {
             saúde e a aparência da pele, deixando-a mais limpa, suave e
             radiante.
           </Typography>
-          <Box sx={{ p: 1 }} className="flex justify-between items-center">
+          <Box className="flex justify-between items-center">
             <Typography variant="body2">
               <Typography variant="body2">
                 <Link
                   href="https://wa.me/+558599185575?text=Olá, Amanda gostaria de agendar Promoção da semana!"
                   target="_blank"
                 >
-                  <Button className=" bg-fuchsia-900 w-full">Contate-me</Button>
+                  <Button className=" bg-fuchsia-900 p-2">Contate-me</Button>
                 </Link>
               </Typography>
             </Typography>
-            <Stack
-              direction="row"
-              spacing={1}
-              className="sm:text-lg font-semibold text-sm"
-            >
+            <Stack direction="row" spacing={1} className=" font-semibold ">
               R$: 100,00
             </Stack>
           </Box>
