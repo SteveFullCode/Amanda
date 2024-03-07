@@ -4,7 +4,7 @@ import Image from "next/image";
 import Insta from "@/assets/instagram-svgrepo-com.svg";
 function Footer() {
   return (
-    <footer className="w-full h-full py-7 px-3 bg-zinc-200 rounded-xl ">
+    <footer className="w-full h-full py-7 px-3 bg-zinc-200 rounded-t-full ">
       <div className="flex justify-between items-center  container">
         <h2 className="font-semibold text-lg">
           <Link

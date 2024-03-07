@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import Wpp from "@/assets/Wpp.svg";
+import CustomizedRating from "@/components/avaliacao/avaliacao";
+import Comentarios from "@/components/avaliacao/comentarios";
 
 export default function Home() {
   return (
@@ -67,6 +69,7 @@ export default function Home() {
         <Regras />
       </div>
       <Sobre />
+      <Comentarios />
     </main>
   );
 }

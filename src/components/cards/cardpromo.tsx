@@ -52,20 +52,19 @@ export default function CardPromo() {
           <Typography
             color="text.secondary"
             variant="body2"
-            className=" font-semibold text-lg"
+            className=" font-semibold text-lg text-center"
           >
-            limpeza de pele
+            Limpeza de pele
+            <br /> + <br />
+            Spa Labial
           </Typography>
           <Typography
             color="text.secondary"
             variant="body2"
-            className=" font-semibold text-sm text-justify"
+            className=" font-semibold text-sm text-center"
           >
-            Um procedimento estético realizado para remover impurezas, células
-            mortas, comedões (cravos), milium (pequenos cistos brancos) e outras
-            obstruções dos poros da pele. Este procedimento ajuda a melhorar a
-            saúde e a aparência da pele, deixando-a mais limpa, suave e
-            radiante.
+            Um combo de procedimentos feitos especialmente em comemoração ao mês
+            da mulher.
           </Typography>
           <Box className="flex justify-between items-center">
             <Typography variant="body2">
@@ -74,7 +73,7 @@ export default function CardPromo() {
                   href="https://wa.me/+558599185575?text=Olá, Amanda gostaria de agendar Promoção da semana!"
                   target="_blank"
                 >
-                  <Button className=" bg-fuchsia-900 p-2">Contate-me</Button>
+                  <Button className=" bg-fuchsia-900 p-2 ">Contate-me</Button>
                 </Link>
               </Typography>
             </Typography>
