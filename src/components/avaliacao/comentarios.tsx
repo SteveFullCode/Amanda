@@ -65,7 +65,7 @@ export default function Comentarios() {
   };
 
   return (
-    <section className="w-full mb-10">
+    <section className="w-full mb-10 hidden">
       <h2 className="text-center text-3xl font-semibold mb-5">Avaliações</h2>
       <div className="flex justify-between items-center mb-5">
         <h3 className="font-semibold text-xl">Clientes: ({enviados.length})</h3>
