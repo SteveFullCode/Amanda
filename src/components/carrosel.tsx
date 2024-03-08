@@ -19,13 +19,13 @@ import CardOito from "./cards/cartdoito";
 
 export function CarouselSpacing() {
   const cardComponents: JSX.Element[] = [
-    <CardUm key="card1" />,
-    <CardDois key="card2" />,
-    <CardTres key="card3" />,
-    <CardQuatro key="card4" />,
     <CardCinco key="card5" />,
+    <CardUm key="card1" />,
     <CardSeis key="card6" />,
+    <CardTres key="card3" />,
     <CardSete key="card7" />,
+    <CardQuatro key="card4" />,
+    <CardDois key="card2" />,
     <CardOito key="card8" />,
   ];
 
