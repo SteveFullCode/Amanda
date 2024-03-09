@@ -53,7 +53,9 @@ export default function Comentarios() {
 
   const fetchComentarios = async () => {
     try {
-      const response = await axios.get<Comentario[]>(API_BASE_URL);
+      const response = await axios.get<Comentario[]>(
+        `${API_BASE_URL}/comentarios`
+      );
       setEnviados(response.data);
     } catch (error) {
       console.error("Erro ao buscar os comentários:", error);
@@ -71,12 +73,15 @@ export default function Comentarios() {
   const handleEnviar = async () => {
     if (nome.trim() !== "") {
       try {
-        const response = await axios.post<Comentario>(API_BASE_URL, {
-          nome,
-          comentario,
-          instagram,
-          avaliacao,
-        });
+        const response = await axios.post<Comentario>(
+          `${API_BASE_URL}/comentarios`,
+          {
+            nome,
+            comentario,
+            instagram,
+            avaliacao,
+          }
+        );
         setEnviados([...enviados, response.data]);
         setNome("");
         setComentario("");
