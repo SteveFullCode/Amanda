@@ -1,5 +1,5 @@
 "use client";
-import * as React from "react";
+
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -8,6 +8,15 @@ import CustomizedRating from "./avaliacao";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+interface Comentario {
+  nome: string;
+  comentario: string;
+  instagram: string;
+  avaliacao?: number;
+}
 
 const style = {
   position: "absolute" as "absolute",
@@ -31,12 +40,25 @@ interface Enviado {
 }
 
 export default function Comentarios() {
-  const [avaliacao, setAvaliacao] = React.useState(0);
-  const [open, setOpen] = React.useState(false);
-  const [nome, setNome] = React.useState("");
-  const [comentario, setComentario] = React.useState("");
-  const [instagram, setInstagram] = React.useState("");
-  const [enviados, setEnviados] = React.useState<Enviado[]>([]);
+  const [avaliacao, setAvaliacao] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [nome, setNome] = useState("");
+  const [comentario, setComentario] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [enviados, setEnviados] = useState<Comentario[]>([]);
+  const API_BASE_URL = "https://long-red-angler-toga.cyclic.app";
+  useEffect(() => {
+    fetchComentarios();
+  }, []);
+
+  const fetchComentarios = async () => {
+    try {
+      const response = await axios.get<Comentario[]>(API_BASE_URL);
+      setEnviados(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar os comentários:", error);
+    }
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -46,26 +68,28 @@ export default function Comentarios() {
     setOpen(false);
   };
 
-  const handleEnviar = () => {
+  const handleEnviar = async () => {
     if (nome.trim() !== "") {
-      setEnviados([
-        ...enviados,
-        {
-          nome: nome,
-          comentario: comentario,
-          instagram: instagram,
-          avaliacao: avaliacao,
-        },
-      ]);
-      setNome("");
-      setComentario("");
-      setInstagram("");
-      handleClose();
+      try {
+        const response = await axios.post<Comentario>(API_BASE_URL, {
+          nome,
+          comentario,
+          instagram,
+          avaliacao,
+        });
+        setEnviados([...enviados, response.data]);
+        setNome("");
+        setComentario("");
+        setInstagram("");
+        handleClose();
+      } catch (error) {
+        console.error("Erro ao enviar o comentário:", error);
+      }
     }
   };
 
   return (
-    <section className="w-full mb-10 hidden">
+    <section className="w-full mb-10 ">
       <h2 className="text-center text-3xl font-semibold mb-5">Avaliações</h2>
       <div className="flex justify-between items-center mb-5">
         <h3 className="font-semibold text-xl">Clientes: ({enviados.length})</h3>
