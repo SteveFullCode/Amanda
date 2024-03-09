@@ -15,7 +15,7 @@ interface Comentario {
   nome: string;
   comentario: string;
   instagram: string;
-  avaliacao?: number;
+  coracoes: number;
 }
 
 const style = {
@@ -32,30 +32,26 @@ const style = {
   pb: 3,
 };
 
-interface Enviado {
-  nome: string;
-  comentario: string;
-  instagram: string;
-  avaliacao?: number;
-}
-
 export default function Comentarios() {
   const [avaliacao, setAvaliacao] = useState(0);
   const [open, setOpen] = useState(false);
   const [nome, setNome] = useState("");
+  const [nomeError, setNomeError] = useState("");
   const [comentario, setComentario] = useState("");
+  const [coracoes, setCoracoes] = useState(0);
   const [instagram, setInstagram] = useState("");
+  const [instagramError, setInstagramError] = useState("");
+  const [avaliacaoError, setAvaliacaoError] = useState("");
   const [enviados, setEnviados] = useState<Comentario[]>([]);
-  const API_BASE_URL = "https://long-red-angler-toga.cyclic.app";
+  const API_BASE_URL = "https://prickly-hare-outerwear.cyclic.app";
+
   useEffect(() => {
     fetchComentarios();
   }, []);
 
   const fetchComentarios = async () => {
     try {
-      const response = await axios.get<Comentario[]>(
-        `${API_BASE_URL}/comentarios`
-      );
+      const response = await axios.get<Comentario[]>(API_BASE_URL);
       setEnviados(response.data);
     } catch (error) {
       console.error("Erro ao buscar os comentários:", error);
@@ -71,25 +67,39 @@ export default function Comentarios() {
   };
 
   const handleEnviar = async () => {
-    if (nome.trim() !== "") {
-      try {
-        const response = await axios.post<Comentario>(
-          `${API_BASE_URL}/comentarios`,
-          {
-            nome,
-            comentario,
-            instagram,
-            avaliacao,
-          }
-        );
-        setEnviados([...enviados, response.data]);
-        setNome("");
-        setComentario("");
-        setInstagram("");
-        handleClose();
-      } catch (error) {
-        console.error("Erro ao enviar o comentário:", error);
-      }
+    if (nome.trim() === "") {
+      setNomeError("O nome é obrigatório");
+      return;
+    } else {
+      setNomeError("");
+    }
+    if (instagram.trim() === "") {
+      setInstagramError("O Instagram é obrigatório");
+      return;
+    } else {
+      setInstagramError("");
+    }
+    if (avaliacao === 0) {
+      setAvaliacaoError("A avaliação é obrigatória");
+      return;
+    } else {
+      setAvaliacaoError("");
+    }
+
+    try {
+      const response = await axios.post<Comentario>(API_BASE_URL, {
+        nome,
+        comentario,
+        instagram,
+        coracoes: avaliacao,
+      });
+      setEnviados([...enviados, response.data]);
+      setNome("");
+      setComentario("");
+      setInstagram("");
+      handleClose();
+    } catch (error) {
+      console.error("Erro ao enviar o comentário:", error);
     }
   };
 
@@ -119,28 +129,34 @@ export default function Comentarios() {
                 placeholder="Nome"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
+                className={nomeError ? "border-red-500" : ""}
               />
+              {nomeError && <p className="text-red-500">{nomeError}</p>}
+
               <Textarea
                 placeholder="Seu comentário será muito bem vindo."
                 className="max-h-52"
                 value={comentario}
                 onChange={(e) => setComentario(e.target.value)}
               />
+
               <div>
                 <p>Opcional</p>
                 <Input
                   placeholder="Instagram"
                   value={instagram}
                   onChange={(e) => setInstagram(e.target.value)}
+                  className={instagramError ? "border-red-500" : ""}
                 />
+                {instagramError && (
+                  <p className="text-red-500">{instagramError}</p>
+                )}
               </div>
-              <p
-                id="parent-modal-description"
-                className="text-center font-semibold"
-              >
-                O nome é obrigatório para a avaliação.
-              </p>
-              <CustomizedRating setAvaliacao={setAvaliacao} />{" "}
+
+              <p className="text-red-500">{avaliacaoError}</p>
+
+              <CustomizedRating setAvaliacao={setAvaliacao} />
+
               <Button onClick={handleEnviar}>Mandar</Button>
             </div>
           </Box>
@@ -154,13 +170,13 @@ export default function Comentarios() {
           <div className="flex justify-between pb-2">
             <p>{enviado.nome}</p>
             {enviado.instagram && <p>{enviado.instagram}</p>}
-            {enviado.avaliacao !== undefined && (
+            {enviado.coracoes !== undefined && (
               <div className="flex items-center">
                 {[...Array(5)].map((_, i) => (
                   <FavoriteIcon
                     key={i}
                     color={
-                      i < (enviado.avaliacao || 0) ? "secondary" : "disabled"
+                      i < (enviado.coracoes || 0) ? "secondary" : "disabled"
                     }
                   />
                 ))}
