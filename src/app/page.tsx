@@ -1,24 +1,21 @@
 import Amanda from "@/assets//logop.png";
 import Amandas from "@/assets/amanda2.png";
 
+import Comentarios from "@/components/avaliacao/comentarios";
 import CardPromo from "@/components/cards/cardpromo";
-import Footer from "@/components/footer";
 import Regras from "@/components/regras";
 import Servicos from "@/components/servicos";
 import Sobre from "@/components/sobre";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import Wpp from "@/assets/Wpp.svg";
-import CustomizedRating from "@/components/avaliacao/avaliacao";
-import Comentarios from "@/components/avaliacao/comentarios";
 
 export default function Home() {
   return (
     <main className="mx-auto w-full h-full container">
       <div className="flex flex-col items-center">
         <h1 className="font-semibold text-2xl md:text-5xl text-fuchsia-900">
-          Amanda fernandes
+          Amanda Fernandes
         </h1>
         <p className="text-sm md:text-xl text-zinc-600">
           Estética e cosmetologa

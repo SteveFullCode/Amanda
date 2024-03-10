@@ -1,5 +1,5 @@
 "use client";
-
+import Insta from "../../assets/instagram-svgrepo-com.svg";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -10,6 +10,7 @@ import { Textarea } from "../ui/textarea";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Image from "next/image";
 
 interface Comentario {
   nome: string;
@@ -123,7 +124,7 @@ export default function Comentarios() {
                 id="parent-modal-title"
                 className="text-center font-semibold "
               >
-                Faça parte da minha família
+                Deixe seu comentário
               </h2>
               <Input
                 placeholder="Nome"
@@ -141,7 +142,6 @@ export default function Comentarios() {
               />
 
               <div>
-                <p>Opcional</p>
                 <Input
                   placeholder="Instagram"
                   value={instagram}
@@ -165,11 +165,18 @@ export default function Comentarios() {
       {enviados.map((enviado, index) => (
         <div
           key={index}
-          className="flex flex-col bg-red-200 rounded-xl p-2 mb-2"
+          className="flex flex-col bg-fuchsia-200 rounded-xl p-2 mb-2"
         >
           <div className="flex justify-between pb-2">
             <p>{enviado.nome}</p>
-            {enviado.instagram && <p>{enviado.instagram}</p>}
+            {enviado.instagram && (
+              <div className="flex items-center gap-1">
+                <Image src={Insta} alt="insta" width={20} />
+                <p className={enviado.instagram ? "text-blue-500" : ""}>
+                  {enviado.instagram}
+                </p>
+              </div>
+            )}
             {enviado.coracoes !== undefined && (
               <div className="flex items-center">
                 {[...Array(5)].map((_, i) => (
@@ -184,7 +191,7 @@ export default function Comentarios() {
             )}
           </div>
           <div>
-            <p>comentário:</p>
+            <p>Comentário:</p>
             <p className="p-2">{enviado.comentario}</p>
           </div>
         </div>
