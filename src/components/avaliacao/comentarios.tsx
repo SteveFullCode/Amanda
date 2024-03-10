@@ -1,17 +1,16 @@
 "use client";
-import Insta from "../../assets/instagram-svgrepo-com.svg";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import { Button } from "../ui/button";
-import CustomizedRating from "./avaliacao";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import Insta from "../../assets/instagram-svgrepo-com.svg";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import CustomizedRating from "./avaliacao";
+import { Modal, Box } from "@mui/material";
 
+import Carta from "@/assets/carta.svg";
+import { Button } from "../ui/button";
 interface Comentario {
   nome: string;
   comentario: string;
@@ -39,17 +38,25 @@ export default function Comentarios() {
   const [nome, setNome] = useState("");
   const [nomeError, setNomeError] = useState("");
   const [comentario, setComentario] = useState("");
-  const [coracoes, setCoracoes] = useState(0);
   const [instagram, setInstagram] = useState("");
   const [instagramError, setInstagramError] = useState("");
   const [avaliacaoError, setAvaliacaoError] = useState("");
   const [enviados, setEnviados] = useState<Comentario[]>([]);
+  const [enviadoComSucesso, setEnviadoComSucesso] = useState(false);
   const API_BASE_URL = "https://prickly-hare-outerwear.cyclic.app";
 
   useEffect(() => {
     fetchComentarios();
   }, []);
+  useEffect(() => {
+    if (enviadoComSucesso) {
+      const timer = setTimeout(() => {
+        setEnviadoComSucesso(false);
+      }, 3000);
 
+      return () => clearTimeout(timer);
+    }
+  }, [enviadoComSucesso]);
   const fetchComentarios = async () => {
     try {
       const response = await axios.get<Comentario[]>(API_BASE_URL);
@@ -98,6 +105,7 @@ export default function Comentarios() {
       setNome("");
       setComentario("");
       setInstagram("");
+      setEnviadoComSucesso(true);
       handleClose();
     } catch (error) {
       console.error("Erro ao enviar o comentário:", error);
@@ -157,7 +165,9 @@ export default function Comentarios() {
 
               <CustomizedRating setAvaliacao={setAvaliacao} />
 
-              <Button onClick={handleEnviar}>Mandar</Button>
+              <Button onClick={handleEnviar} className="">
+                Mandar
+              </Button>
             </div>
           </Box>
         </Modal>
@@ -196,6 +206,16 @@ export default function Comentarios() {
           </div>
         </div>
       ))}
+      {enviadoComSucesso && (
+        <div className="fixed inset-0 flex items-center justify-center">
+          <div className="bg-white border border-gray-300 rounded-lg p-6 flex flex-col items-center">
+            <Image src={Carta} alt="Agradecimento" width={200} height={200} />
+            <p className="text-xl font-semibold mt-4">
+              Obrigado pelo seu comentário!
+            </p>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
