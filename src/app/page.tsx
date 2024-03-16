@@ -34,7 +34,12 @@ export default function Home() {
             <Button className=" bg-fuchsia-900 w-full">Contate-me</Button>
           </Link>
         </div>
-        <Image src={Amanda} alt="Eu" width={400} className="rounded-full " />
+        <Image
+          src={Amanda}
+          alt="Eu"
+          width={400}
+          className="rounded-full bg-fuchsia-100"
+        />
       </section>
       <div className="md:flex-row flex items-center justify-around md:gap-20  gap-10 flex-col mb-20 pb-16">
         <Image
